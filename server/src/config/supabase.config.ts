@@ -1,5 +1,7 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import dotenv from "dotenv";
+import { Enroll } from "../enroll/entities/enroll.entity.js";
+import { User } from "../user/entities/user.entity.js";
 dotenv.config();
 
 const SUPABASE_PASSWORD = process.env.SUPABASE_PASSWORD;
@@ -18,7 +20,9 @@ export const supabaseConfig: TypeOrmModuleOptions = {
   username: SUPABASE_USER,
   password: SUPABASE_PASSWORD,
   database: "postgres",
-  entities: [],
+  entities: [User, Enroll],
+  synchronize: true,
+  logging: true,
   ssl: {
     rejectUnauthorized: false,
   },
@@ -26,4 +30,5 @@ export const supabaseConfig: TypeOrmModuleOptions = {
     max: 20,
     connectionTimeoutMillis: 2000,
   },
+  migrations: ["src/migrations/*.ts"],
 };

@@ -6,8 +6,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 import { supabaseConfig } from "./config/supabase.config.js";
 import { ThrottlerModule } from "@nestjs/throttler";
 import { AuthModule } from "./auth/auth.module.js";
-import { UserModule } from './user/user.module';
-import { EnrollModule } from './enroll/enroll.module';
+import { UserModule } from "./user/user.module.js";
+import { EnrollModule } from "./enroll/enroll.module.js";
 
 @Module({
   imports: [
