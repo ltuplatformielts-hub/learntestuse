@@ -1,9 +1,11 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { Module } from "@nestjs/common";
+import { AppController } from "./app.controller.js";
+import { AppService } from "./app.service.js";
+import { TypeOrmModule } from "@nestjs/typeorm";
+import { supabaseConfig } from "./config/supabase.config.js";
 
 @Module({
-  imports: [],
+  imports: [TypeOrmModule.forRoot(supabaseConfig)],
   controllers: [AppController],
   providers: [AppService],
 })
