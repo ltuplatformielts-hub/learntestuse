@@ -8,7 +8,8 @@ import { ThrottlerModule } from "@nestjs/throttler";
 import { AuthModule } from "./auth/auth.module.js";
 import { UserModule } from "./user/user.module.js";
 import { EnrollModule } from "./enroll/enroll.module.js";
-import { WpPostsModule } from './wp-posts/wp-posts.module';
+import { WpPostsModule } from "./wp-posts/wp-posts.module.js";
+import { mysqlConfig } from "./config/mysql.config.js";
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { WpPostsModule } from './wp-posts/wp-posts.module';
     }),
     ConfigModule.forRoot({ isGlobal: true, envFilePath: ".env" }),
     TypeOrmModule.forRoot(supabaseConfig),
+    TypeOrmModule.forRoot(mysqlConfig),
     AuthModule,
     UserModule,
     EnrollModule,

@@ -1,8 +1,8 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { WpPostsController } from './wp-posts.controller';
-import { WpPostsService } from './wp-posts.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { WpPostsController } from "./wp-posts.controller.js";
+import { WpPostsService } from "./wp-posts.service.js";
 
-describe('WpPostsController', () => {
+describe("WpPostsController", () => {
   let controller: WpPostsController;
 
   beforeEach(async () => {
@@ -14,7 +14,7 @@ describe('WpPostsController', () => {
     controller = module.get<WpPostsController>(WpPostsController);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(controller).toBeDefined();
   });
 });

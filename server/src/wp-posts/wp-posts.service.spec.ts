@@ -1,7 +1,7 @@
-import { Test, TestingModule } from '@nestjs/testing';
-import { WpPostsService } from './wp-posts.service';
+import { Test, TestingModule } from "@nestjs/testing";
+import { WpPostsService } from "./wp-posts.service.js";
 
-describe('WpPostsService', () => {
+describe("WpPostsService", () => {
   let service: WpPostsService;
 
   beforeEach(async () => {
@@ -12,7 +12,7 @@ describe('WpPostsService', () => {
     service = module.get<WpPostsService>(WpPostsService);
   });
 
-  it('should be defined', () => {
+  it("should be defined", () => {
     expect(service).toBeDefined();
   });
 });
