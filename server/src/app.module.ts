@@ -8,6 +8,7 @@ import { ThrottlerModule } from "@nestjs/throttler";
 import { AuthModule } from "./auth/auth.module.js";
 import { UserModule } from "./user/user.module.js";
 import { EnrollModule } from "./enroll/enroll.module.js";
+import { WpPostsModule } from './wp-posts/wp-posts.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { EnrollModule } from "./enroll/enroll.module.js";
     AuthModule,
     UserModule,
     EnrollModule,
+    WpPostsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
