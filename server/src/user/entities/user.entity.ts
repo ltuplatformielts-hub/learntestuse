@@ -22,18 +22,15 @@ export class User {
   id: string;
 
   @Index()
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: false })
   email: string;
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: false })
   username: string;
 
   @Index()
   @Column({ type: "varchar", nullable: true })
   phoneNumber: string;
-
-  @Column({ type: "varchar", nullable: false })
-  password: string;
 
   @Index()
   @Column({ nullable: false })
@@ -66,6 +63,7 @@ export class User {
 
   @CreateDateColumn({ type: "timestamptz" })
   createdAt: Date;
+
   @UpdateDateColumn({ type: "timestamptz" })
   updatedAt: Date;
 }

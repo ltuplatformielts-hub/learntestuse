@@ -1,4 +1,9 @@
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
+import {
+  HeadContent,
+  Scripts,
+  createRootRoute,
+  useMatches,
+} from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import Footer from "../components/Footer";
@@ -30,15 +35,18 @@ export const Route = createRootRoute({
 });
 
 function RootDocument({ children }: { children: React.ReactNode }) {
+  const matches = useMatches();
+  const hideLayout = matches.some((match) => match.staticData?.hideLayout);
+
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
       </head>
       <body className="font-sans antialiased wrap-anywhere">
-        <Header />
+        {hideLayout || <Header />}
         {children}
-        <Footer />
+        {hideLayout || <Footer />}
         <TanStackDevtools
           config={{
             position: "bottom-right",

@@ -1,6 +1,6 @@
 import { TypeOrmModuleOptions } from "@nestjs/typeorm";
 import "dotenv/config.js";
-import { WpPost } from "../wp-posts/entities/wp-post.entity.js";
+import { WpPost } from "../wp-post/entities/wp-post.entity.js";
 
 export const mysqlConfig: TypeOrmModuleOptions = {
   name: "mysql",

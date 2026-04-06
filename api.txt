@@ -1,0 +1,57 @@
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { Repository } from "typeorm";
+import { WpPost } from "./entities/wp-post.entity.js";
+
+@Injectable()
+export class WpPostsService {
+  constructor(
+    @InjectRepository(WpPost, "mysql")
+    private readonly wpPostsRepository: Repository<WpPost>,
+  ) {}
+
+  async findAll(page: number, limit: number) {
+    try {
+      const skip = (page - 1) * limit;
+
+      const queryBuilder = this.wpPostsRepository
+        .createQueryBuilder("p")
+        // 1. Join lấy tên tác giả
+        .leftJoin("wp_users", "u", "p.post_author = u.ID")
+        // 2. Join postmeta để tìm ID của ảnh đại diện (_thumbnail_id)
+        .leftJoin("wp_postmeta", "pm", "p.ID = pm.post_id AND pm.meta_key = '_thumbnail_id'")
+        // 3. Join lại bảng wp_posts lần nữa (alias là 'img') để lấy URL của cái ID ảnh đó
+        .leftJoin("wp_posts", "img", "pm.meta_value = img.ID")
+        .where("p.post_type = :type", { type: "tutor_quiz" })
+        .andWhere("p.post_status = :status", { status: "publish" });
+
+      const data = await queryBuilder
+        .select([
+          "p.ID AS id",
+          "p.post_title AS title",
+          "u.display_name AS author",
+          "p.post_date AS createdAt",
+          "img.guid AS thumbnail", // Đây chính là URL trực tiếp của hình ảnh
+        ])
+        .orderBy("p.post_date", "DESC")
+        .offset(skip)
+        .limit(limit)
+        .getRawMany();
+
+      const total = await queryBuilder.getCount();
+      const totalPages = Math.ceil(total / limit);
+
+      return {
+        message: data.length > 0 ? "Posts fetched successfully" : "No posts found",
+        data,
+        total,
+        page,
+        limit,
+        totalPages,
+      };
+    } catch (error) {
+      console.error("Error fetching wp_posts with images:", error);
+      throw new InternalServerErrorException("Failed to fetch WordPress posts.");
+    }
+  }
+}

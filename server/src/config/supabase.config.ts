@@ -14,6 +14,7 @@ if (!SUPABASE_PASSWORD || typeof SUPABASE_PASSWORD !== "string") {
 }
 
 export const supabaseConfig: TypeOrmModuleOptions = {
+  name: "supabase",
   type: "postgres",
   host: process.env.SUPABASE_HOST,
   port: process.env.SUPABASE_PORT ? parseInt(process.env.SUPABASE_PORT) : 5432,

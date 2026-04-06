@@ -8,8 +8,8 @@ import { ThrottlerModule } from "@nestjs/throttler";
 import { AuthModule } from "./auth/auth.module.js";
 import { UserModule } from "./user/user.module.js";
 import { EnrollModule } from "./enroll/enroll.module.js";
-import { WpPostsModule } from "./wp-posts/wp-posts.module.js";
 import { mysqlConfig } from "./config/mysql.config.js";
+import { WpPostModule } from "./wp-post/wp-post.module.js";
 
 @Module({
   imports: [
@@ -22,7 +22,7 @@ import { mysqlConfig } from "./config/mysql.config.js";
     AuthModule,
     UserModule,
     EnrollModule,
-    WpPostsModule,
+    WpPostModule,
   ],
   controllers: [AppController],
   providers: [AppService],

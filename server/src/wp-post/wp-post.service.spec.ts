@@ -1,15 +1,15 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { WpPostsService } from "./wp-posts.service.js";
+import { WpPostService } from "./wp-post.service.js";
 
-describe("WpPostsService", () => {
-  let service: WpPostsService;
+describe("WpPostService", () => {
+  let service: WpPostService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [WpPostsService],
+      providers: [WpPostService],
     }).compile();
 
-    service = module.get<WpPostsService>(WpPostsService);
+    service = module.get<WpPostService>(WpPostService);
   });
 
   it("should be defined", () => {
